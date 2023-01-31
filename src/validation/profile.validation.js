@@ -15,7 +15,6 @@ const profileSchema = yup.object().shape({
   bio: yup.string().nullable(),
   appNotification: yup.bool(),
   emailNotification: yup.bool(),
-  location: yup.string().nullable(),
   profilePicture: yup.mixed(),
 });
 

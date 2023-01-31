@@ -194,7 +194,11 @@ export const RoomModal = ({ open, title, handleClose, inputData }) => {
               />
             </FormControl> */}
               <Grid item>
-                <ControlledMultipleFileInput name="images" control={control} errorMessage={errors?.images?.message} />
+                <ControlledMultipleFileInput
+                  name="images"
+                  control={control}
+                  errorMessage={errors?.images?.message}
+                />
               </Grid>
               <Grid item>
                 <SignupBtn variant="contained" type="submit">
