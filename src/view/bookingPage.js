@@ -124,6 +124,11 @@ const BookingPage = () => {
   useEffect(() => {
     dispatch(fetchAccommodationsAction(1, -1));
   }, []);
+  const [age, setAge] = React.useState('');
+
+  const handleChange = (event) => {
+    setAge(event.target.value);
+  };
 
   return (
     <>
@@ -140,10 +145,10 @@ const BookingPage = () => {
             marginBottom="15px"
           >
             <SelectFormControl
-              size={{
-                xs: 'small',
-                md: 'medium',
-              }}
+            // size={{
+            //   xs: 'small',
+            //   md: 'medium',
+            // }}
             >
               <InputLabel id="searchAccommodation">
                 Search Accommodation

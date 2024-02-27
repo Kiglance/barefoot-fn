@@ -86,7 +86,7 @@ const SideBar = ({ sideBarLinks }) => {
                     'transparent',
               padding: '20px',
             }}
-            key={index}
+            // key={index}
           >
             <Link
               to={links.to}

@@ -19,12 +19,14 @@ export const SignupAction = (userData) => (dispatch) => {
   })
     .then((res) => {
       /* istanbul ignore next */
+      console.log(res);
       res.data.status === 201
         ? dispatch(signupSucces(res.data))
         : dispatch(signupFail(res.data));
     })
     .catch((error) => {
       /* istanbul ignore next */
+      console.log(error);
       dispatch(signupFail(error.response.data));
     });
 };
