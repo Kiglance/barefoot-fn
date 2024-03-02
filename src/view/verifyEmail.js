@@ -13,6 +13,8 @@ import {
   linkStyles,
 } from '../helpers/emailVerification.helpers';
 
+const feURL = process.env.REACT_APP_BASE_URL;
+
 const EmailVerification = () => {
   const [verification, setVerification] = useState({});
   const endTime = new Date().getTime() + 6000;
@@ -30,7 +32,7 @@ const EmailVerification = () => {
     verifyEmail();
   }, []);
   seconds === 0 && verification.status === 200
-    ? (window.location.href = 'https://barefoot-nomad-fe.netlify.app/login')
+    ? (window.location.href = `${feURL}/login`)
     : '';
   return (
     <>

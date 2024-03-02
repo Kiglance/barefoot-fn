@@ -1,7 +1,8 @@
 import { io } from 'socket.io-client';
 import { createContext } from 'react';
 
-export const socket = io('https://barefoot-backend-development.herokuapp.com', {
+const baseURL = process.env.REACT_APP_BACKEND_URL;
+export const socket = io(baseURL, {
   autoConnect: false,
   auth: {
     token: '',

@@ -18,6 +18,7 @@ const initialState = {
 const chatReducer = (state = initialState, action) => {
   switch (action.type) {
     case RECEIVE_CHATS:
+      console.log('action', action);
       return {
         ...state,
         allMessages: action.payload,

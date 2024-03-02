@@ -48,6 +48,9 @@ export const getAcc = () => async (dispatch) => {
 export const fetchSingleAccommodation = (acc_id) => async (dispatch) => {
   try {
     const res = await axiosInstance.get(`/accommodations/${acc_id}`);
+    console.log('====================================');
+    console.log(res.data);
+    console.log('====================================');
     dispatch({
       type: FETCH_SINGLE_ACCOMMODATION_SUCCESS,
       payload: res.data,
@@ -97,7 +100,7 @@ export const createAccommodationAction =
         payload: res,
         error: null,
       });
-      toast.success(res.data.message);
+      toast.success(res?.data?.message);
     } catch (err) {
       toast.error(err.response.data.message);
       dispatch({
@@ -121,7 +124,7 @@ export const updateAccommodationAction = (acc_id, data) => async (dispatch) => {
     toast.error(error.response.data.message);
     dispatch({
       type: UPDATE_ACCOMMODATION_FAILED,
-      payload: err.response.data,
+      payload: error.response.data,
     });
   }
 };

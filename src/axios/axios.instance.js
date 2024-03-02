@@ -2,8 +2,9 @@
 /* eslint-disable no-useless-concat */
 import axios from 'axios';
 
+const baseURL = process.env.REACT_APP_BACKEND_URL;
 const axiosInstance = axios.create({
-  baseURL: process.env.REACT_APP_BACKEND_URL,
+  baseURL: `${baseURL}/api/v1/`,
   // baseURL: 'https://barefoot-backend-development.herokuapp.com/api/v1',
 });
 
@@ -11,8 +12,9 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
   (request) => {
     // Do something before request is sent
-    request.headers.authorization = `${'Bearer' + ' '}${JSON.parse(localStorage.getItem('userCredentials'))?.token
-      }`;
+    request.headers.authorization = `${'Bearer' + ' '}${
+      JSON.parse(localStorage.getItem('userCredentials'))?.token
+    }`;
     return request;
   },
   (error) =>
@@ -33,7 +35,10 @@ axiosInstance.interceptors.response.use(
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
     /* istanbul ignore next */
-    if (error.response.status === 401) {
+    console.log('====================================');
+    console.log(error);
+    console.log('====================================');
+    if (error?.response?.status === 401) {
       localStorage.removeItem('userCredentials');
       window.location.href = '/login';
     }

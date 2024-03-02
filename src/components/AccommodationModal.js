@@ -31,7 +31,7 @@ import ControlledMultipleFileInput from './controlledMultipleFileInput';
 
 const style = {
   position: 'relative',
-  top: '400px',
+  top: '300px',
   left: { xs: '195px', sm: '300px', md: '600px', lg: '750px', xl: '750px' },
   transform: 'translate(-50%, -50%)',
   width: {
@@ -41,15 +41,16 @@ const style = {
     lg: 420,
     xl: 420,
   },
-  minHeight: {
-    xs: 550,
-    md: 530,
+  maxHeight: {
+    xs: '90%',
+    md: '90%',
   },
   bgcolor: 'background.paper',
   border: '2px solid #fff',
   borderRadius: '10px',
   boxShadow: 24,
   p: 4,
+  overflowY: 'scroll',
 };
 
 export const AccommodationModal = ({ open, title, handleClose, inputData }) => {
@@ -141,7 +142,12 @@ export const AccommodationModal = ({ open, title, handleClose, inputData }) => {
     (state) => state.updateAccommodationReducer.pending,
   );
   return (
-    <Box>
+    <Box
+      sx={{
+        maxHeight: '300px',
+        overflowY: 'scroll',
+      }}
+    >
       <Modal
         open={open}
         onClose={handleClose}

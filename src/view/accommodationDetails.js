@@ -24,7 +24,7 @@ const papeStyles = {
   height: '100px',
   background: 'transparent',
   top: '40%',
-  color: 'white',
+  color: 'black',
   alignItems: 'center',
   justifyContent: 'space-around',
   flexDirection: 'column',
@@ -75,6 +75,21 @@ export const AccommodationDetails = () => {
   }, [id]);
   const role = JSON.parse(localStorage.getItem('userCredentials'));
   const data = accommodationState.accommodations?.data;
+  const parsedImages =
+    typeof data?.images === 'string' && data?.images
+      ? JSON.parse(data?.images)
+      : data?.images;
+
+  const parsedServices =
+    typeof data?.services === 'string' && data?.services
+      ? JSON.parse(data?.services)
+      : data?.services;
+
+  const parsedAmenities =
+    typeof data?.amenities === 'string' && data?.amenities
+      ? JSON.parse(data?.amenities)
+      : data?.amenities;
+
   return (
     <>
       {role.role_id === 0 ? <Header /> : null}
@@ -128,7 +143,7 @@ export const AccommodationDetails = () => {
                 <Typography sx={styles}>Services:</Typography>
 
                 <CardContent>
-                  {data?.services?.map((service) => (
+                  {parsedServices?.map((service) => (
                     <Grid sx={itemStyles}>
                       <Typography>{service}</Typography>
                     </Grid>
@@ -141,7 +156,7 @@ export const AccommodationDetails = () => {
                 <Typography sx={styles}>Amenities:</Typography>
 
                 <CardContent>
-                  {data?.amenities?.map((amenity) => (
+                  {parsedAmenities?.map((amenity) => (
                     <Grid sx={itemStyles}>
                       <Typography>{amenity}</Typography>
                     </Grid>
@@ -171,7 +186,7 @@ export const AccommodationDetails = () => {
             <Grid container marginTop={2} padding={2} alignContent="center">
               <Typography sx={styles}>Images:</Typography>
               <Grid container spacing={1} marginTop={1} justifyContent="center">
-                {data?.images?.map((image) => (
+                {parsedImages?.map((image) => (
                   <Grid item lg={3} md={4} sm={6} xs={12}>
                     <img
                       src={image}

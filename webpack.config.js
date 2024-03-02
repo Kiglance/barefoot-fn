@@ -8,6 +8,9 @@ dotenv.config();
 
 const envKeys = {
   'process.env.DEPLOY_PRIME_URL': JSON.stringify(process.env.DEPLOY_PRIME_URL),
+  'process.env.REACT_APP_BASE_URL': JSON.stringify(
+    process.env.REACT_APP_BASE_URL,
+  ),
   'process.env.REACT_APP_BACKEND_URL': JSON.stringify(
     process.env.REACT_APP_BACKEND_URL,
   ),
