@@ -8,7 +8,8 @@
     "build": "webpack --mode production",
     "lint": "npx eslint --fix .",
     "test": "jest --collect-coverage",
-    "coverage": "yarn run test"
+    "coverage": "yarn run test",
+    "yarninstall": "npm install -g yarn && yarn install"
   },
   "repository": {
     "type": "git",
