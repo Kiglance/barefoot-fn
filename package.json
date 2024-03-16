@@ -5,6 +5,7 @@
   "main": "./src/index.js",
   "scripts": {
     "dev": "webpack serve --mode development",
+    "prod": "webpack serve --mode production",
     "build": "webpack --mode production",
     "lint": "npx eslint --fix .",
     "test": "jest --collect-coverage",

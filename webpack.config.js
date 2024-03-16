@@ -35,7 +35,8 @@ module.exports = {
     historyApiFallback: true,
     headers: { 'Access-Control-Allow-Origin': '*' },
     open: true,
-    hot: true,
+    // hot: true,/
+    allowedHosts: 'all',
   },
   module: {
     rules: [
@@ -56,7 +57,7 @@ module.exports = {
     ],
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
+    // new webpack.HotModuleReplacementPlugin(),
     new HtmlWebPackPlugin({ template: 'public/index.html' }),
     new webpack.DefinePlugin(envKeys),
     new CleanWebpackPlugin(),

@@ -1,18 +1,20 @@
-FROM node:latest as build
+FROM node:latest
 
 
-WORKDIR /
+WORKDIR /app
 RUN npm install --force --global yarn
 
-COPY . .
+COPY . /app
 # RUN npm install --global yarn
 RUN yarn install
 # RUN npm install --force
-RUN npm run build
+# RUN npm run build
 
-FROM nginx:alpine
-COPY --from=build /build /usr/share/nginx/html
+# FROM nginx:alpine
+# COPY --from=build /build /usr/share/nginx/html
 
-EXPOSE 8080
+EXPOSE 10000
 
-CMD ["nginx", "-g", "daemon off;"]
+# CMD ["nginx", "-g", "daemon off;"]
+
+CMD ["yarn", "prod"]
