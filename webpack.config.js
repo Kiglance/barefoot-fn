@@ -17,7 +17,6 @@ const envKeys = {
 };
 
 module.exports = {
-  target: 'web',
   entry: path.join(__dirname, 'src', 'index.js'),
   output: {
     path: path.resolve(__dirname, 'build'),
@@ -33,10 +32,11 @@ module.exports = {
   devServer: {
     port: process.env.PORT || '4000',
     historyApiFallback: true,
-    headers: { 'Access-Control-Allow-Origin': '*' },
-    open: true,
+    // headers: { 'Access-Control-Allow-Origin': '*' },
+    // open: true,
+    compress: true,
+    liveReload: false,
     // hot: true,/
-    allowedHosts: 'all',
   },
   module: {
     rules: [
