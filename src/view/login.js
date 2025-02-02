@@ -44,7 +44,7 @@ const LoginImage = styled('img')(() => ({
 const SocialLoginLink = ({ type, variant, startIcon, sx, value }) => (
   <A
     href={`${process.env.REACT_APP_BACKEND_URL}/users/${type}/login/?${
-      process.env.DEPLOY_PRIME_URL && window.location.origin
+      process.env.REACT_APP_BASE_URL && window.location.origin
     }/social/login`}
   >
     <Buttons variant={variant} startIcon={startIcon} sx={sx} value={value} />
