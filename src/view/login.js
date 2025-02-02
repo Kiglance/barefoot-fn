@@ -41,13 +41,32 @@ const LoginImage = styled('img')(() => ({
   marginBottom: '50px',
 }));
 
-const SocialLoginLink = ({ type, variant, startIcon, sx, value }) => (
+const SocialLoginLink = ({
+  type,
+  variant,
+  startIcon,
+  sx,
+  value,
+  disabled = false,
+}) => (
   <A
-    href={`${process.env.REACT_APP_BACKEND_URL}/users/${type}/login/?${
-      process.env.REACT_APP_BASE_URL && window.location.origin
-    }/social/login`}
+    href={
+      !disabled &&
+      `${process.env.REACT_APP_BACKEND_URL}/users/${type}/login/?${
+        process.env.REACT_APP_BASE_URL && window.location.origin
+      }/social/login`
+    }
+    sx={{
+      cursor: !disabled ? 'pointer' : 'not-allowed',
+    }}
   >
-    <Buttons variant={variant} startIcon={startIcon} sx={sx} value={value} />
+    <Buttons
+      disabled={disabled}
+      variant={variant}
+      startIcon={startIcon}
+      sx={sx}
+      value={value}
+    />
   </A>
 );
 
@@ -293,6 +312,7 @@ const Login = () => {
               startIcon={<FacebookRoundedIcon />}
               sx={mediaStyles}
               value="Login with Facebook"
+              disabled
             />
           </Box>
           <Link
