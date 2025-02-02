@@ -14,10 +14,14 @@
   },
   "plugins": ["react", "prettier"],
   "rules": {
+    // "no-undef": "off",
     "prettier/prettier": ["error"],
     "react/jsx-no-undef": "off",
     "react/jsx-filename-extension": "off",
     "react/jsx-wrap-multilines": "off",
-    "no-undef": "off"
+    "no-nested-ternary": "off",
+    "camelcase": "off",
+    "react/jsx-props-no-spreading": "off",
+    "no-unused-expressions": "off"
   }
 }

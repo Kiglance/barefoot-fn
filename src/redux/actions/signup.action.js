@@ -12,7 +12,7 @@ export const signupFail = (error) => ({
   loading: false,
 });
 
-export const SignupAction = (userData) => (dispatch) => {
+export const SignupAction = (userData) => (dispatch) =>
   axios(`/users/register`, {
     method: 'POST',
     data: userData,
@@ -20,13 +20,12 @@ export const SignupAction = (userData) => (dispatch) => {
     .then((res) => {
       /* istanbul ignore next */
       console.log(res);
-      res.data.status === 201
+      return res.data.status === 201
         ? dispatch(signupSucces(res.data))
         : dispatch(signupFail(res.data));
     })
     .catch((error) => {
       /* istanbul ignore next */
       console.log(error);
-      dispatch(signupFail(error.response.data));
+      return dispatch(signupFail(error.response.data));
     });
-};

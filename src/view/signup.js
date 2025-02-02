@@ -1,37 +1,37 @@
-import React, { useEffect, useState } from 'react';
-import {
-  Box,
-  Typography,
-  InputAdornment,
-  IconButton,
-  CircularProgress,
-  FormHelperText,
-  Alert,
-  Stack,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-} from '@mui/material';
+import { makeStyles } from '@material-ui/core/styles';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import { useSelector } from 'react-redux';
-import { makeStyles } from '@material-ui/core/styles';
-import signup_img from '../assets/signup_img.svg';
-import { SignupAction } from '../redux/actions/signup.action';
-import { getAllLocations } from '../redux/actions/location.action';
-import InputField from '../components/input';
-import store from '../redux/store';
 import {
-  SignupImage,
-  SignupBtn,
+  Alert,
+  Box,
+  CircularProgress,
+  FormControl,
+  FormHelperText,
+  IconButton,
+  InputAdornment,
+  InputLabel,
+  MenuItem,
+  Select,
+  Stack,
+  Typography,
+} from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import signup_img from '../assets/signup_img.svg';
+import InputField from '../components/input';
+import LandingFooter from '../components/landing/footer';
+import Header from '../components/landing/header';
+import {
   BoxCustomStyles,
+  errorAlert,
   FormControlSX,
   getUserLocation,
-  errorAlert,
+  SignupBtn,
+  SignupImage,
 } from '../helpers/signup.helper';
-import Header from '../components/landing/header';
-import LandingFooter from '../components/landing/footer';
+import { getAllLocations } from '../redux/actions/location.action';
+import { SignupAction } from '../redux/actions/signup.action';
+import store from '../redux/store';
 
 const mainBoxSx = {
   display: 'flex',
@@ -63,15 +63,15 @@ const Signup = () => {
   const [location, setLocation] = useState('');
   const [validationError, setValidationError] = useState({});
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
   const [fetchLocation, setFetchLocation] = useState([]);
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
   };
 
-  const validate = function () {
+  const validate = function validate() {
     const regexLetter = /^[A-Za-z]+$/;
+    // eslint-disable-next-line no-useless-escape
     const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     const regexPassword = /^(?=.*[A-Z])(?=.*[0-9])\w{8,}$/;
     const emailError =
@@ -101,7 +101,7 @@ const Signup = () => {
         ? ''
         : 'Invalid input for last name';
     const locationError = location === '' ? 'Location is required' : '';
-    setValidationError((state) => ({
+    setValidationError(() => ({
       firstName: fnameError,
       lastName: lnameError,
       email: emailError,
@@ -130,17 +130,16 @@ const Signup = () => {
             ? await getUserLocation()
             : location,
       };
-      await store.dispatch(SignupAction(userInput));
-      const res = await signupState.signupReducer;
-      if (res.data.status !== 409) {
-        setFirstName('');
-        setLastName('');
-        setEmail('');
-        setPassword('');
-      }
+      await store.dispatch(SignupAction(userInput))?.then(async (res) => {
+        setLoading(false);
+        if (res?.payload?.status && res?.payload?.status !== 409) {
+          setFirstName('');
+          setLastName('');
+          setEmail('');
+          setPassword('');
+        }
+      });
     }
-    setLoading(false);
-    setError(true);
   };
   /* istanbul ignore next */
   const populateSelectLocation = async () => {
