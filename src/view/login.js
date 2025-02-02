@@ -51,10 +51,11 @@ const SocialLoginLink = ({
 }) => (
   <A
     href={
-      !disabled &&
-      `${process.env.REACT_APP_BACKEND_URL}/users/${type}/login/?${
-        process.env.REACT_APP_BASE_URL && window.location.origin
-      }/social/login`
+      !disabled
+        ? `${process.env.REACT_APP_BACKEND_URL}/users/${type}/login/?${
+            process.env.REACT_APP_BASE_URL || window.location.origin
+          }/social/login`
+        : undefined
     }
     sx={{
       cursor: !disabled ? 'pointer' : 'not-allowed',
