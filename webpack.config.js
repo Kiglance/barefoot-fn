@@ -14,6 +14,8 @@ const envKeys = {
   'process.env.REACT_APP_BACKEND_URL': JSON.stringify(
     process.env.REACT_APP_BACKEND_URL,
   ),
+  'process.env.DEFAULT_EMAIL': JSON.stringify(process.env.DEFAULT_EMAIL),
+  'process.env.DEFAULT_PASSWORD': JSON.stringify(process.env.DEFAULT_PASSWORD),
 };
 
 const isDevelopment = process.env.NODE_ENV !== 'production';

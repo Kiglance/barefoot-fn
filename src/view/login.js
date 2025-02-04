@@ -123,8 +123,8 @@ const formSection = {
 
 const Login = () => {
   const pages = ['Home', 'About Us', 'Accommodation', 'Sign In', 'Sign Up'];
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState(process.env.DEFAULT_EMAIL || '');
+  const [password, setPassword] = useState(process.env.DEFAULT_PASSWORD || '');
   const [showPassword, setShowPassword] = useState(false);
   const [validationError, setValidationError] = useState({});
   const [loading, setLoading] = useState(false);
