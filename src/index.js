@@ -1,9 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
-import AllRoutes from './routes';
-import store from './redux/store';
+import 'slick-carousel/slick/slick-theme.css';
+import 'slick-carousel/slick/slick.css';
 import { socket, socketContext } from './helpers/context';
+import store from './redux/store';
+import AllRoutes from './routes';
+
+global.React = React;
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -13,5 +17,3 @@ root.render(
     </Provider>
   </socketContext.Provider>,
 );
-
-module.hot.accept();

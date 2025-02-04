@@ -1,9 +1,18 @@
-import React, { useEffect, useState } from 'react';
 import { LocationCity } from '@mui/icons-material';
+import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
+import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+import {
+  Box,
+  Grid,
+  IconButton,
+  Paper,
+  styled,
+  Typography,
+} from '@mui/material';
+import { useEffect, useState } from 'react';
 import 'react-multi-carousel/lib/styles.css';
-import { Grid, Paper, styled, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
-import Slider from 'react-styled-carousel';
+import Slider from 'react-slick';
 import { getLoc } from '../../redux/actions/location.action';
 import store from '../../redux/store';
 import { Spinner } from './spinner';
@@ -18,6 +27,69 @@ const Stylepaper = styled(Paper)(({ theme }) => ({
     marginLeft: '10%',
   },
 }));
+
+const PrevArrow = (props) => {
+  const { onClick, style } = props;
+  return (
+    <Box
+      component="div"
+      onClick={onClick}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter') onClick();
+      }}
+      className="slick-arrow slick-prev"
+      style={{ ...style, display: 'block' }}
+      role="button"
+      tabIndex={0}
+      sx={{
+        width: 'max-content',
+        height: 'max-content',
+        position: 'absolute',
+        top: '55%',
+        left: '-65px',
+        '&::before': {
+          display: 'none',
+        },
+        zIndex: 1,
+      }}
+    >
+      <IconButton>
+        <ArrowLeftIcon fontSize="large" color="primary" />
+      </IconButton>
+    </Box>
+  );
+};
+const NextArrow = (props) => {
+  const { onClick, style } = props;
+  return (
+    <Box
+      component="div"
+      onClick={onClick}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter') onClick();
+      }}
+      className="slick-arrow slick-next"
+      style={{ ...style, display: 'block' }}
+      role="button"
+      tabIndex={0}
+      sx={{
+        width: 'max-content',
+        height: 'max-content',
+        position: 'absolute',
+        top: '55%',
+        right: '-65px',
+        '&::after': {
+          display: 'none',
+        },
+        zIndex: 1,
+      }}
+    >
+      <IconButton>
+        <ArrowRightIcon fontSize="large" color="primary" />
+      </IconButton>
+    </Box>
+  );
+};
 
 const Slide = () => {
   const locations = useSelector((state) => state.landingReducer);
@@ -64,43 +136,58 @@ const Slide = () => {
             xs: '75%',
           }}
           paddingTop={10}
+          className="slider-container"
         >
-          <Slider responsive={responsive} showDots={false} autoSlide={5000}>
+          <Slider
+            responsive={responsive}
+            autoplay
+            autoplaySpeed={1000}
+            dots
+            infinite
+            slidesToShow={3}
+            slidesToScroll={1}
+            speed={500}
+            arrows
+            prevArrow={<PrevArrow />}
+            nextArrow={<NextArrow />}
+          >
             {locations.locations.map((value) => (
-              <Stylepaper elevation={3} key={value.id}>
-                <div
-                  style={{
-                    width: '100%',
-                    height: '145px',
-                    background: '#F8F9FA',
-                  }}
-                >
-                  <LocationCity
-                    sx={{ color: '#00095E', width: '50%', height: '145px' }}
-                  />
-                </div>
-                <p
-                  style={{
-                    color: '#00095E',
-                    float: 'left',
-                    marginTop: '40px',
-                    marginLeft: '10px',
-                  }}
-                >
-                  {value.name}
-                </p>
-                <p
-                  style={{
-                    color: '#7EA0FF',
-                    float: 'left',
-                    position: 'absolute',
-                    bottom: '7%',
-                    marginLeft: '10px',
-                  }}
-                >
-                  {value.country}
-                </p>
-              </Stylepaper>
+              <div key={value.id}>
+                <Stylepaper elevation={3}>
+                  <div
+                    style={{
+                      width: '100%',
+                      height: '145px',
+                      background: '#F8F9FA',
+                    }}
+                  >
+                    <LocationCity
+                      sx={{ color: '#00095E', width: '50%', height: '145px' }}
+                    />
+                  </div>
+                  <p
+                    style={{
+                      color: '#00095E',
+                      float: 'left',
+                      marginTop: '40px',
+                      marginLeft: '10px',
+                    }}
+                  >
+                    {value.name}
+                  </p>
+                  <p
+                    style={{
+                      color: '#7EA0FF',
+                      float: 'left',
+                      position: 'absolute',
+                      bottom: '7%',
+                      marginLeft: '10px',
+                    }}
+                  >
+                    {value.country}
+                  </p>
+                </Stylepaper>
+              </div>
             ))}
           </Slider>
         </Grid>

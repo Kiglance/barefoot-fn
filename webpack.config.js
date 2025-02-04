@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const dotenv = require('dotenv');
+const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
@@ -15,6 +16,8 @@ const envKeys = {
   ),
 };
 
+const isDevelopment = process.env.NODE_ENV !== 'production';
+
 module.exports = {
   entry: path.join(__dirname, 'src', 'index.js'),
   output: {
@@ -26,6 +29,7 @@ module.exports = {
       dynamicImport: true, // Note you need to enable `dynamicImport ` here
     },
   },
+  devtool: isDevelopment ? 'source-map' : undefined,
   mode: process.env.NODE_ENV || 'development',
   resolve: { extensions: ['*', '.js', '.jsx'] },
   devServer: {
@@ -56,6 +60,7 @@ module.exports = {
     ],
   },
   plugins: [
+    isDevelopment && new ReactRefreshPlugin(),
     // new webpack.HotModuleReplacementPlugin(),
     new HtmlWebPackPlugin({ template: 'public/index.html' }),
     new webpack.DefinePlugin(envKeys),

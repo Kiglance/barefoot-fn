@@ -3,6 +3,9 @@
     "browser": true,
     "es2021": true
   },
+  "globals": {
+    "React": "readonly"
+  },
   "extends": ["plugin:react/recommended", "airbnb", "prettier"],
   "parserOptions": {
     "ecmaFeatures": {
@@ -22,6 +25,7 @@
     "no-nested-ternary": "off",
     "camelcase": "off",
     "react/jsx-props-no-spreading": "off",
-    "no-unused-expressions": "off"
+    "no-unused-expressions": "off",
+    "react/prop-types": "off"
   }
 }
