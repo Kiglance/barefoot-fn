@@ -15,12 +15,7 @@ const Notification = ({ notifications, unread }) => {
   const handleClose = () => setOpen(false);
   return (
     <Box>
-      <Badge
-        badgeContent={unread}
-        color="error"
-        badge
-        sx={{ color: '#FFC800' }}
-      >
+      <Badge badgeContent={unread} color="error" sx={{ color: '#FFC800' }}>
         <NotificationsIcon onClick={handleOpen} sx={{ position: 'relative' }} />
       </Badge>
       <NotificationModal handleClose={handleClose} open={open} />

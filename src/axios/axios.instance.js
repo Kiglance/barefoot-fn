@@ -35,9 +35,6 @@ axiosInstance.interceptors.response.use(
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
     /* istanbul ignore next */
-    console.log('====================================');
-    console.log(error);
-    console.log('====================================');
     if (error?.response?.status === 401) {
       localStorage.removeItem('userCredentials');
       window.location.href = '/login';

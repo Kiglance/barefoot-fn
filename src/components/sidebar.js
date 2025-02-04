@@ -34,7 +34,6 @@ const SideBar = ({ sideBarLinks }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const [op, setOp] = React.useState(false);
-  console.log(window.location.pathname);
   const handleClick = (event) => {
     // setAnchorEl(event.currentTarget)
     if (op === false) {
@@ -54,7 +53,6 @@ const SideBar = ({ sideBarLinks }) => {
 
   return (
     <Box
-      fullWidth
       sx={{
         backgroundColor: '#1A2D6D',
         // backgroundColor: theme?.pallete.primary.main,

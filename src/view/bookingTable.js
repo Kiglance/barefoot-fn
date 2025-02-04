@@ -162,7 +162,6 @@ const BookingTable = () => {
   const rows = bookings.booking?.bookings?.rows?.map((booking) => booking);
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows?.length) : 0;
-  // console.log(rows)
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };

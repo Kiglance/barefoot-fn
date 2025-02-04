@@ -90,7 +90,7 @@ const DashboardPreview = () => {
         socket.auth.token = JSON.parse(
           localStorage.getItem('userCredentials'),
         )?.token;
-        socket.connect();
+        // socket.connect();
       }
     });
     socket.on('notification', (notification) => {
@@ -101,7 +101,7 @@ const DashboardPreview = () => {
 
   const pages = [
     `${roleId?.first_name}`,
-    <Badge badgeContent={unread} color="error" badge sx={{ color: '#FFC800' }}>
+    <Badge badgeContent={unread} color="error" sx={{ color: '#FFC800' }}>
       <Notification notifications={notifications} unread={unread} />
     </Badge>,
     data.status === 200 ? (

@@ -26,9 +26,7 @@ import { getAllLocations } from '../redux/actions/location.action';
 import { CreateTrip } from '../redux/actions/CreateTrip.action';
 import { updateTrip } from '../redux/actions/UpdateTrip.action';
 import { CreateTripSelector, FormControlSX } from '../helpers/signup.helper';
-import {
-  retrieveRequests,
-} from '../redux/actions/requester.action';
+import { retrieveRequests } from '../redux/actions/requester.action';
 import InputField from '../components/input';
 import Buttons from '../components/button';
 import Header from '../components/header';
@@ -280,7 +278,9 @@ const RequesterContent = () => {
                   ref={selectBox}
                 >
                   {locations?.map((location) => (
-                    <MenuItem value={location.id}>{location.name}</MenuItem>
+                    <MenuItem key={location.id} value={location.id}>
+                      {location.name}
+                    </MenuItem>
                   ))}
                 </Select>
               </FormControl>

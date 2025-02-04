@@ -31,7 +31,7 @@ module.exports = {
       dynamicImport: true, // Note you need to enable `dynamicImport ` here
     },
   },
-  devtool: isDevelopment ? 'source-map' : undefined,
+  devtool: isDevelopment ? 'eval-source-map' : undefined,
   mode: process.env.NODE_ENV || 'development',
   resolve: { extensions: ['*', '.js', '.jsx'] },
   devServer: {

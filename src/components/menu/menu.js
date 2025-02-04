@@ -31,7 +31,6 @@ export default function PositionedMenu({
     setAnchorEl(null);
   };
   const userProfile = store.getState().loggedInUser?.data?.data?.user?.profile;
-  console.log(userProfile);
   return (
     <div style={{ marginLeft: '20px' }}>
       <Button

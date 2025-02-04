@@ -17,9 +17,9 @@ export const SignupAction = (userData) => (dispatch) =>
     method: 'POST',
     data: userData,
   })
+    // eslint-disable-next-line arrow-body-style
     .then((res) => {
       /* istanbul ignore next */
-      console.log(res);
       return res.data.status === 201
         ? dispatch(signupSucces(res.data))
         : dispatch(signupFail(res.data));
