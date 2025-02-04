@@ -28,7 +28,6 @@ import { loginAction } from '../redux/actions/login.action';
 import store from '../redux/store';
 import InputField from '../components/input';
 import Buttons from '../components/button';
-import { urlSerializer } from '../helpers/login.helpers';
 import { errorAlert } from '../helpers/signup.helper';
 import Header from '../components/landing/header';
 import LandingFooter from '../components/landing/footer';
@@ -52,7 +51,7 @@ const SocialLoginLink = ({
   <A
     href={
       !disabled
-        ? `${process.env.REACT_APP_BACKEND_URL}/users/${type}/login/?${
+        ? `${process.env.REACT_APP_BACKEND_URL}/users/${type}/login/?BASE_URL=${
             process.env.REACT_APP_BASE_URL || window.location.origin
           }/social/login`
         : undefined
