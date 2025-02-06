@@ -1,21 +1,20 @@
 /* eslint-disable import/prefer-default-export */
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { Typography, Grid, CardActionArea, Paper, styled } from '@mui/material';
+import { Add } from '@mui/icons-material';
+import { CardActionArea, Grid, Paper, Typography } from '@mui/material';
+import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import { Add } from '@mui/icons-material';
-import { useSelector, useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import SimpleImageSlider from 'react-simple-image-slider';
-import Button from '@mui/material/Button';
-import { fetchSingleAccommodation } from '../redux/actions/accommodation.action';
-import { Stars } from '../components/landing/stars.component';
-import Buttons from '../components/button';
-import { unloggedInUser } from '../helpers/login.helpers';
-import Header from '../components/landing/header';
-import { RoomModal } from '../components/RoomModal';
-import { RatingModal } from '../components/RatingModal';
 import AccommodationComment from '../components/accommodation/accommodation.comment';
+import Buttons from '../components/button';
+import Header from '../components/landing/header';
+import { Stars } from '../components/landing/stars.component';
+import RatingModal from '../components/RatingModal';
+import { RoomModal } from '../components/RoomModal';
+import { fetchSingleAccommodation } from '../redux/actions/accommodation.action';
 
 const papeStyles = {
   display: 'flex',
@@ -48,12 +47,12 @@ const cardStyles = {
   minHeight: '280px',
   width: { xs: '260px', sm: '210px', md: '260px', lg: '250px' },
 };
+
 /* istanbul ignore next */
 export const AccommodationDetails = () => {
   const accommodationState = useSelector(
     (state) => state.fetchSingleAccommodationReducer,
   );
-  const path = window.location.pathname.split('/');
   const { id } = useParams();
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
@@ -73,6 +72,7 @@ export const AccommodationDetails = () => {
   useEffect(() => {
     dispatch(fetchSingleAccommodation(id));
   }, [id]);
+
   const role = JSON.parse(localStorage.getItem('userCredentials'));
   const data = accommodationState.accommodations?.data;
   const parsedImages =
@@ -144,7 +144,7 @@ export const AccommodationDetails = () => {
 
                 <CardContent>
                   {parsedServices?.map((service) => (
-                    <Grid sx={itemStyles}>
+                    <Grid sx={itemStyles} key={service}>
                       <Typography>{service}</Typography>
                     </Grid>
                   ))}
@@ -156,8 +156,8 @@ export const AccommodationDetails = () => {
                 <Typography sx={styles}>Amenities:</Typography>
 
                 <CardContent>
-                  {parsedAmenities?.map((amenity) => (
-                    <Grid sx={itemStyles}>
+                  {parsedAmenities?.map?.((amenity) => (
+                    <Grid sx={itemStyles} key={amenity}>
                       <Typography>{amenity}</Typography>
                     </Grid>
                   ))}
@@ -187,7 +187,7 @@ export const AccommodationDetails = () => {
               <Typography sx={styles}>Images:</Typography>
               <Grid container spacing={1} marginTop={1} justifyContent="center">
                 {parsedImages?.map((image) => (
-                  <Grid item lg={3} md={4} sm={6} xs={12}>
+                  <Grid item lg={3} md={4} sm={6} xs={12} key={image}>
                     <img
                       src={image}
                       alt="limg"
@@ -251,7 +251,7 @@ export const AccommodationDetails = () => {
             <Grid container justifyContent="center" direction="row" padding={2}>
               {!data?.Rooms.length === 0 ? (
                 data?.Rooms.map((room) => (
-                  <Grid item md={4} lg={3}>
+                  <Grid item md={4} lg={3} key={room.id}>
                     <Card sx={{ width: 280, minHeight: 300 }}>
                       <CardActionArea>
                         <SimpleImageSlider

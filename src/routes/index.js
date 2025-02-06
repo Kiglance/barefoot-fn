@@ -1,36 +1,28 @@
 /* eslint-disable import/no-named-as-default */
 /* eslint-disable import/no-named-as-default-member */
 /* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Outlet,
-  Navigate,
-} from 'react-router-dom';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import LandingPage from '../view/index';
-import Login from '../view/login';
-import Signup from '../view/signup';
-import EmailVerification from '../view/verifyEmail';
-import GoogleLogin from '../view/google_login';
-import Forgot from '../view/Forgot';
-import ResetPassword from '../view/ResetPassword';
-import TravelAdmin from '../view/travel-admin';
-import DashboardPreview from '../layouts/requester';
-import RequesterContent from '../view/requesterContent';
-import Profile from '../view/profile';
+import Assignmanager from '../components/assign_manager';
+import { ReadOneTrip } from '../components/read_one_trip';
 import UserSettingsModal from '../components/user_role';
+import DashboardPreview from '../layouts/requester';
 import { AccommodationDetails } from '../view/accommodationDetails';
 import AccommodationPage from '../view/allAccommodations';
 import BookingPage from '../view/bookingPage';
-import PageNotFound from '../components/PageNotFound';
-import { ReadOneTrip } from '../components/read_one_trip';
 import ChatPage from '../view/chatPage';
-import Assignmanager from '../components/assign_manager';
+import Forgot from '../view/Forgot';
+import GoogleLogin from '../view/google_login';
+import LandingPage from '../view/index';
+import Login from '../view/login';
+import Profile from '../view/profile';
+import RequesterContent from '../view/requesterContent';
+import ResetPassword from '../view/ResetPassword';
+import Signup from '../view/signup';
+import TravelAdmin from '../view/travel-admin';
+import EmailVerification from '../view/verifyEmail';
 
 const theme = createTheme({
   palette: {

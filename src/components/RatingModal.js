@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { Box, Typography, Stack } from '@mui/material';
+import { Star } from '@mui/icons-material';
+import CloseIcon from '@mui/icons-material/Close';
+import { Box, Stack, Typography } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import Modal from '@mui/material/Modal';
-import { Star, StarBorder, StarHalf } from '@mui/icons-material';
-import { makeStyles } from '@material-ui/core/styles';
-import CloseIcon from '@mui/icons-material/Close';
-import { Rating } from '../redux/actions/Rating.action';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchSingleAccommodation } from '../redux/actions/accommodation.action';
+import { Rating } from '../redux/actions/Rating.action';
+
 /* istanbul ignore next */
-export const RatingModal = ({ open, title, handleClose, pathId }) => {
-  const [rates, setRates] = useState([1, 2, 3, 4, 5]);
+const RatingModal = ({ open, title, handleClose, pathId }) => {
+  const [rates] = useState([1, 2, 3, 4, 5]);
   const [rate, setRate] = useState(0);
   const dispatch = useDispatch();
   const style = {
@@ -36,18 +36,18 @@ export const RatingModal = ({ open, title, handleClose, pathId }) => {
     p: 4,
   };
   /* istanbul ignore next */
-  const useStyle = makeStyles((theme) => ({
-    formControl: {
-      [theme.breakpoints.down('xs')]: {
-        width: 280,
-        minHeight: 20,
-        margin: '30px 0px',
-      },
-      width: 350,
-      minHeight: 50,
-      margin: '20px 0px',
-    },
-  }));
+  // const useStyle = makeStyles((theme) => ({
+  //   formControl: {
+  //     [theme.breakpoints.down('xs')]: {
+  //       width: 280,
+  //       minHeight: 20,
+  //       margin: '30px 0px',
+  //     },
+  //     width: 350,
+  //     minHeight: 50,
+  //     margin: '20px 0px',
+  //   },
+  // }));
   /* istanbul ignore next */
   const rating = async () => {
     if (rate) {
@@ -60,7 +60,6 @@ export const RatingModal = ({ open, title, handleClose, pathId }) => {
     rating();
   }, [rate]);
 
-  const classes = useStyle();
   return (
     <Box>
       <Modal
@@ -94,13 +93,12 @@ export const RatingModal = ({ open, title, handleClose, pathId }) => {
             {title}
           </Typography>
           <Stack direction="row">
-            {rates.map((element) => (
-              <>
-                <Star
-                  sx={{ color: rate >= element ? '#FFC800' : '#000' }}
-                  onClick={() => setRate(element)}
-                />
-              </>
+            {rates.map((element, index) => (
+              <Star
+                key={index}
+                sx={{ color: rate >= element ? '#FFC800' : '#000' }}
+                onClick={() => setRate(element)}
+              />
             ))}
           </Stack>
         </Box>
@@ -108,3 +106,5 @@ export const RatingModal = ({ open, title, handleClose, pathId }) => {
     </Box>
   );
 };
+
+export default RatingModal;

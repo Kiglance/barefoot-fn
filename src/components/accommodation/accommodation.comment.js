@@ -128,7 +128,7 @@ const AccommodationComments = ({ accommodationState }) => {
                   marginBottom: '20px',
                   height: { xs: 'auto', md: 'auto' },
                 }}
-                disabled={user.role_id === 2 ? true : false}
+                disabled={user.role_id === 2}
               />
             </Paper>
 
@@ -163,7 +163,7 @@ const AccommodationComments = ({ accommodationState }) => {
                       'Update'
                     )
                   }
-                  disabled={updateComment === '' ? 'disabled' : null}
+                  disabled={updateComment === ''}
                   onClick={handleUpdate}
                 />
                 <Buttons
@@ -216,7 +216,7 @@ const AccommodationComments = ({ accommodationState }) => {
                     'Comment'
                   )
                 }
-                disabled={createComment === '' ? 'disabled' : null}
+                disabled={createComment === ''}
                 onClick={handleSubmit}
               />
             )}
@@ -341,7 +341,7 @@ const AccommodationComments = ({ accommodationState }) => {
                               'Update'
                             )
                           }
-                          disabled={updateComment === '' ? 'disabled' : null}
+                          disabled={updateComment === ''}
                           onClick={handleUpdate}
                         />
                         <Buttons
