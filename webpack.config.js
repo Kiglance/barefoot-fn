@@ -8,6 +8,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 dotenv.config();
 
 const envKeys = {
+  // 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
   'process.env.REACT_APP_BASE_URL': JSON.stringify(
     process.env.REACT_APP_BASE_URL,
   ),
@@ -20,10 +21,7 @@ const envKeys = {
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
-if (process.env.NODE_ENV === 'production') {
-  global.console.log = () => {};
-  window.console.log = () => {};
-}
+console.log('isDevelopment', isDevelopment);
 
 module.exports = {
   entry: path.join(__dirname, 'src', 'index.js'),

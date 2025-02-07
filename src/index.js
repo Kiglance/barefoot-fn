@@ -9,6 +9,10 @@ import AllRoutes from './routes';
 
 global.React = React;
 
+if (process.env.NODE_ENV === 'production') {
+  global.console.log = () => {};
+}
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <socketContext.Provider value={socket}>
