@@ -1,36 +1,28 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
-import { Box, Badge, Avatar, Paper, Typography } from '@mui/material';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import { Link, Outlet, useNavigate, Navigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import Logout from '@mui/icons-material/Logout';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
-import io from 'socket.io-client';
+import { Avatar, Badge, Box, Paper, Typography } from '@mui/material';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import { useContext, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { loggedInUser } from '../redux/actions/auth';
+import accommodationIcon from '../assets/accommodationIcon.svg';
+import bookingIcon from '../assets/bookingIcon.svg';
+import chatIcon from '../assets/chatIcon.svg';
+import logo from '../assets/Logo.svg';
+import tripIcon from '../assets/tripIcon.svg';
+import MobLink from '../components/mobLinks';
 import NavBar from '../components/navBar';
 import SideBar from '../components/sidebar';
-import MobLink from '../components/mobLinks';
-import Notification from '../view/notificationsPanel/notification';
-import accommodationIcon from '../assets/accommodationIcon.svg';
-import chatIcon from '../assets/chatIcon.svg';
-import tripIcon from '../assets/tripIcon.svg';
-import bookingIcon from '../assets/bookingIcon.svg';
-import logo from '../assets/Logo.svg';
-import store from '../redux/store';
-import { logoutUser } from '../redux/actions/logout.action';
-import { retrieveAction } from '../redux/actions/profile.action';
-import settingsIcon from '../assets/settings-icon.svg';
-import { fetchNotifications } from '../redux/actions/notifications.action';
-import {
-  chatLeave,
-  receiveMessage,
-  socketConnecting,
-} from '../redux/actions/chat.action';
 import { socketContext } from '../helpers/context';
+import { loggedInUser } from '../redux/actions/auth';
+import { logoutUser } from '../redux/actions/logout.action';
+import { fetchNotifications } from '../redux/actions/notifications.action';
+import { retrieveAction } from '../redux/actions/profile.action';
+import store from '../redux/store';
+import Notification from '../view/notificationsPanel/notification';
 
 const DashboardPreview = () => {
   const [name, setName] = useState('');
@@ -76,22 +68,25 @@ const DashboardPreview = () => {
   useEffect(() => {
     fetchProfile();
     dispatch(loggedInUser());
+    // Connect to socket
+    socket.auth.token = JSON.parse(
+      localStorage.getItem('userCredentials'),
+    )?.token;
     socket.connect();
   }, []);
   useEffect(() => {
+    if (!socket.connected) {
+      socket.connect();
+    }
+
     socket.on('connect', () => {
-      console.log(socket.connected); // true
+      console.log('socket.connected successfully', socket.connected); // true
+    });
+    socket.on('connect_error', (err) => {
+      console.log('socket connect_error', err); // true
     });
     socket.on('authFailed', (data) => {
       console.log(data);
-    });
-    socket.on('connect_error', (error) => {
-      if (error.message) {
-        socket.auth.token = JSON.parse(
-          localStorage.getItem('userCredentials'),
-        )?.token;
-        // socket.connect();
-      }
     });
     socket.on('notification', (notification) => {
       toast.success(notification);
@@ -107,13 +102,13 @@ const DashboardPreview = () => {
     data.status === 200 ? (
       <Avatar
         src={user?.profile_picture}
-        alt="prifle image"
+        alt="profile image"
         onClick={handleClick}
       />
     ) : (
       <Avatar
         src={roleId.profile_picture}
-        salt="prifle image"
+        salt="profile image"
         onClick={handleClick}
       />
     ),

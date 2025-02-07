@@ -1,12 +1,11 @@
 import { io } from 'socket.io-client';
 import { createContext } from 'react';
 
-const baseURL = process.env.REACT_APP_BACKEND_URL;
-export const socket = io(baseURL, {
-  retries: 0,
+export const socket = io(new URL(process.env.REACT_APP_BACKEND_URL).origin, {
   autoConnect: false,
+  transports: ['websocket', 'polling', 'webtransport'],
   auth: {
-    token: '',
+    token: JSON.parse(localStorage.getItem('userCredentials') || null)?.token,
   },
 });
 

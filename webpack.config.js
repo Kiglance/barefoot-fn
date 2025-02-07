@@ -20,6 +20,11 @@ const envKeys = {
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
+if (process.env.NODE_ENV === 'production') {
+  global.console.log = () => {};
+  window.console.log = () => {};
+}
+
 module.exports = {
   entry: path.join(__dirname, 'src', 'index.js'),
   output: {

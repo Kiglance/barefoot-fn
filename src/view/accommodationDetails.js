@@ -249,7 +249,7 @@ export const AccommodationDetails = () => {
               </>
             ) : null}
             <Grid container justifyContent="center" direction="row" padding={2}>
-              {!data?.Rooms.length === 0 ? (
+              {data?.Rooms.length ? (
                 data?.Rooms.map((room) => (
                   <Grid item md={4} lg={3} key={room.id}>
                     <Card sx={{ width: 280, minHeight: 300 }}>

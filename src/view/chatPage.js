@@ -89,22 +89,18 @@ const ChatPage = () => {
       localStorage.setItem('allMessages', JSON.stringify(data));
       store.dispatch(receiveMessage(data));
       const { chatReducer } = store.getState();
-      setRecievedMessage((receivedMessage) => [
-        ...receivedMessage,
+      setRecievedMessage((innerReceivedMessage) => [
+        ...innerReceivedMessage,
         ...chatReducer.allMessages.messages,
       ]);
       setLoading(false);
     });
-  }, []);
 
-  useEffect(() => {
     socket.on('user:joined', (data) => {
       setUserJoined([...userJoined, data.data]);
       setNotify(data.users);
     });
-  }, []);
 
-  useEffect(() => {
     socket.on('message:recieve', async (data) => {
       await store.dispatch(sendMessage(data.message));
       const { chatReducer } = store.getState();
@@ -113,12 +109,14 @@ const ChatPage = () => {
         chatReducer.sendMessage,
       ]);
     });
+
     socket.on('user:disconnected', (data) => {
       setUserLeaving(data.user);
       setNotify(data.usersLeft);
       localStorage.setItem('socket', JSON.stringify(data));
     });
   }, []);
+
   useEffect(scrollToBottom, [receivedMessage]);
 
   return (

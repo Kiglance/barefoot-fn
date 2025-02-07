@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Assignmanager from '../components/assign_manager';
 import { ReadOneTrip } from '../components/read_one_trip';
 import UserSettingsModal from '../components/user_role';
-import DashboardPreview from '../layouts/requester';
+import DashboardPreview from '../layouts/DashboardPreview';
 import { AccommodationDetails } from '../view/accommodationDetails';
 import AccommodationPage from '../view/allAccommodations';
 import BookingPage from '../view/bookingPage';
