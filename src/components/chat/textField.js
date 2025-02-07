@@ -1,5 +1,3 @@
-import React, { useState } from 'react';
-import { TextField, Button } from '@mui/material';
 import { makeStyles } from '@material-ui/core/styles';
 import { Send } from '@mui/icons-material';
 import Buttons from '../button';
@@ -27,7 +25,15 @@ export const TextInput = ({ setMessage, send }) => {
 
   return (
     <>
-      <form className={classes.wrapForm} noValidate autoComplete="off">
+      <form
+        className={classes.wrapForm}
+        noValidate
+        autoComplete="off"
+        onSubmit={(e) => {
+          e.preventDefault();
+          send(e);
+        }}
+      >
         <InputField
           label="Message"
           type="text"
